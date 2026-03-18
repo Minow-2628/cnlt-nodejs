@@ -1,0 +1,14 @@
+<%- include('layouts/header') %>
+<%- include('layouts/navbar') %>
+
+<h1>Danh sách sản phẩm</h1>
+
+<ul>
+    <% products.forEach(p => { %>
+        <li>
+            <a href="/detail/<%= p.id %>"><%= p.name %></a>
+        </li>
+    <% }) %>
+</ul>
+
+<%- include('layouts/footer') %>

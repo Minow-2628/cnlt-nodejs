@@ -1,26 +1,27 @@
-const http = require('http');
+const express = require('express');
+const app = express();
 
-const server = http.createServer((req, res) => {
-  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+// dùng port 3000 để tránh xung đột
+const PORT = 4000;
 
-  if (req.url === '/') {
-    res.statusCode = 200;
-    res.end('Trang chủ');
-  } 
-  else if (req.url === '/about') {
-    res.statusCode = 200;
-    res.end('Trang giới thiệu');
-  } 
-  else if (req.url === '/contact') {
-    res.statusCode = 200;
-    res.end('Trang liên hệ');
-  } 
-  else {
-    res.statusCode = 404;
-    res.end('Không tìm thấy trang');
-  }
+// cấu hình static resource
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/pages/index.html');
 });
 
-server.listen(3000, () => {
-  console.log('Server đang chạy tại http://localhost:3000');
+// route giới thiệu
+app.get('/about', (req, res) => {
+    res.send('Trang giới thiệu');
+});
+
+// route liên hệ
+app.get('/contact', (req, res) => {
+    res.send('Trang liên hệ');
+});
+
+// chạy server
+app.listen(PORT, () => {
+    console.log(`Server đang chạy tại http://localhost:${PORT}`);
 });
