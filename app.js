@@ -1,36 +1,22 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const BlogPost = require('./models/BlogPost');
-const app = express();
-app.use(express.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
-mongoose.connect('mongodb://127.0.0.1:27017/blogDB')
-.then(() => console.log('Kết nối MongoDB thành công'))
-.catch((error) => console.log(error));
-app.post('/blogposts/:id/delete', async (req, res) => {
-  await BlogPost.findByIdAndDelete(req.params.id);
-  res.redirect('/');
-});
+const connectDB = require('./config/db');
+const postRoutes = require('./routes/postRoutes');
 
-app.get('/', async (req, res) => {
-const posts = await BlogPost.find({});
-res.render('index', { posts });
-});
-app.get('/blogposts/new', (req, res) => {
-res.render('create');
-});
-app.post('/blogposts/store', async (req, res) => {
-await BlogPost.create({
-title: req.body.title,
-body: req.body.body
-});
-res.redirect('/');
-});
-app.get('/blogposts/:id', async (req, res) => {
-const post = await BlogPost.findById(req.params.id);
-res.render('detail', { post });
-});
+const app = express();
+
+// Kết nối DB
+connectDB();
+
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
 app.use(express.static('public'));
+
+// Routes
+app.use('/', postRoutes);
+
+// Run
 app.listen(3000, () => {
-console.log('Server đang chạy tại http://localhost:3000');
+  console.log('Server chạy tại http://localhost:3000');
 });
