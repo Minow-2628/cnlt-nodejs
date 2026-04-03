@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Trang chủ</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+<h1>Danh sách bài viết</h1>
+<a href="/blogposts/new" class="btn-home">Tạo bài viết mới</a>
+</header>
+
+<% if (typeof msg !== 'undefined') { %>
+  <div class="alert"><%= msg %></div>
+<% } %>
+
+<main>
+<% if(posts.length === 0) { %>
+    <p style="text-align:center;">Chưa có bài viết nào.</p>
+<% } else { %>
+<ul class="post-list">
+  <% posts.forEach(post => { %>
+  <li class="post-item">
+    <h2><%= post.title %></h2>
+    <p><%= post.body %></p>
+    <a href="/blogposts/<%= post._id %>" class="btn-home">Xem chi tiết</a>
+    <a href="/blogposts/edit/<%= post._id %>" class="btn-edit">Chỉnh sửa</a>
+    <form action="/blogposts/delete/<%= post._id %>" method="POST" class="btn-delete-form">
+      <button type="submit" class="btn-delete">Xóa</button>
+    </form>
+  </li>
+  <% }) %>
+</ul>
+<% } %>
+</main>
+</body>
+</html>

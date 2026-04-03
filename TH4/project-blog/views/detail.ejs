@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title><%= post.title %></title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+<h1 class="post-title"><%= post.title %></h1>
+</header>
+<main>
+<div class="post-body"><%= post.body %></div>
+<div style="text-align:center;">
+  <a href="/blogposts/edit/<%= post._id %>" class="btn-edit">Chỉnh sửa</a>
+  <form action="/blogposts/delete/<%= post._id %>" method="POST" class="btn-delete-form">
+    <button type="submit" class="btn-delete">Xóa</button>
+  </form>
+  <a href="/" class="btn-home">Về trang chủ</a>
+</div>
+</main>
+</body>
+</html>
