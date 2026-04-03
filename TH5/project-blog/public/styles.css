@@ -1,0 +1,41 @@
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif; }
+body { background:#f4f4f9; color:#333; line-height:1.6; padding:20px; }
+header { text-align:center; margin-bottom:30px; }
+header h1 { font-size:2rem; color:#2c3e50; }
+a { text-decoration:none; color:#2980b9; transition: color 0.3s; }
+a:hover { color:#1abc9c; }
+button, .btn-home { background:#2980b9; color:#e0d5d5; padding:8px 15px; border:none; border-radius:5px; cursor:pointer; transition: 0.3s; }
+button:hover, .btn-home:hover { background:#1abc9c; }
+form { max-width:600px; margin:0 auto 20px; background:#fff; padding:20px; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.05); }
+form p { margin-bottom:15px; }
+form label { display:block; margin-bottom:5px; font-weight:bold; }
+form input[type="text"], form textarea { width:100%; padding:8px 10px; border:1px solid #ccc; border-radius:5px; font-size:1rem; }
+form textarea { min-height:120px; resize:vertical; }
+
+/* Post list */
+ul.post-list { list-style:none; max-width:800px; margin:0 auto; padding:0; }
+li.post-item { background:#ffffff; padding:15px 20px; margin-bottom:15px; border-radius:8px; box-shadow:0 3px 6px rgba(0,0,0,0.05); }
+li.post-item h2 { margin-bottom:10px; color:#2c3e50; }
+li.post-item p { margin-bottom:10px; }
+li.post-item a { font-weight:bold; }
+
+/* Buttons Edit/Delete */
+.btn-edit { background:#f39c12; color:#fff; padding:6px 12px; border-radius:5px; margin-left:5px; transition:0.3s; }
+.btn-edit:hover { background:#e67e22; }
+.btn-delete { background:#e74c3c; color:#fff; padding:6px 12px; border:none; border-radius:5px; cursor:pointer; transition:0.3s; }
+.btn-delete:hover { background:#c0392b; }
+.btn-delete-form { display:inline-block; margin-left:5px; }
+
+/* Alert thông báo */
+.alert { max-width:800px; margin:20px auto; padding:15px 20px; background:#2ecc71; color:#fff; border-radius:8px; text-align:center; font-weight:bold; box-shadow:0 3px 6px rgba(0,0,0,0.1); }
+
+/* Detail page */
+.post-title { text-align:center; font-size:2rem; margin-bottom:20px; color:#2c3e50; }
+.post-body { max-width:800px; margin:0 auto 30px auto; background:#fff; padding:20px; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.05); font-size:1.1rem; }
+
+/* Responsive */
+@media (max-width:768px) {
+    body { padding:10px; }
+    form, li.post-item, .post-body { padding:15px; }
+    header h1, .post-title { font-size:1.5rem; }
+}
