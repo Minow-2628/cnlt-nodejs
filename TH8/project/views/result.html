@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Kết quả upload</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="upload-box">
+    <h2 id="title"></h2>
+    <p id="msg"></p>
+    <a href="/" class="back-btn">⬅ Quay lại</a>
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get("status");
+    const count = params.get("count");
+
+    const title = document.getElementById("title");
+    const msg = document.getElementById("msg");
+
+    if (status === "success") {
+        title.innerText = "Upload thành công 🎉";
+        msg.innerText = "Đã upload " + count + " file";
+    } else {
+        title.innerText = "Upload thất bại ❌";
+        msg.innerText = "Vui lòng chọn từ 1 đến 17 file";
+    }
+</script>
+
+</body>
+</html>
