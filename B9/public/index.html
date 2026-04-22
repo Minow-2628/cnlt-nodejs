@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Manager Pro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="left">
+    <h2>➕ Ghi danh mới</h2>
+    <input type="hidden" id="studentId">
+    <input id="name" placeholder="Họ và tên">
+    <input id="email" placeholder="Email">
+    <button onclick="saveStudent()">Xác nhận</button>
+  </div>
+
+  <div class="right">
+    <h2>DANH MỤC SINH VIÊN</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Thông tin</th>
+          <th>Trạng thái</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody id="studentList"></tbody>
+    </table>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

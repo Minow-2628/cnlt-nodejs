@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  background: #1e1e1e;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  padding: 30px;
+  gap: 30px;
+}
+
+.left, .right {
+  background: #2b2b2b;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.left {
+  width: 300px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(90deg, #7f00ff, #00c6ff);
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #444;
+}
+
+.action button {
+  width: auto;
+  margin-right: 5px;
+}
