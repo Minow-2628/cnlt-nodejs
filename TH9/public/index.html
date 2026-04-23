@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Manager</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h2>Login</h2>
+  <input id="user" placeholder="Username (admin)">
+  <input id="pass" type="password" placeholder="Password (123456)">
+  <button onclick="login()">Login</button>
+
+  <h2>Add Student</h2>
+  <input id="name" placeholder="Student name (vd: Nguyen Van A)">
+  <input id="email" placeholder="Email (vd: a@gmail.com)">
+  <input id="age" placeholder="Age (16 - 60)">
+  <input id="className" placeholder="Class (vd: CNTT1)">
+  <button onclick="save()">Save</button>
+  <button onclick="clearForm()">Clear</button>
+
+  <h2>Students</h2>
+  <button onclick="load()">Load</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Class</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="list"></tbody>
+  </table>
+
+</div>
+
+<script>
+let loggedIn = false;
+
+function login() {
+  fetch('/api/auth/login', {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      username: document.getElementById('user').value,
+      password: document.getElementById('pass').value
+    })
+  })
+  .then(res => {
+    if (!res.ok) throw Error();
+    loggedIn = true;
+    alert('Login success');
+  })
+  .catch(() => alert('Login failed'));
+}
+
+function save() {
+  if (!loggedIn) {
+    alert('Please login first');
+    return;
+  }
+
+  fetch('/api/students', {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      age: document.getElementById('age').value,
+      className: document.getElementById('className').value
+    })
+  })
+  .then(async res => {
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.message);
+      return;
+    }
+    load();
+    clearForm();
+  })
+  .catch(() => alert('Server error'));
+}
+
+function load() {
+  fetch('/api/students')
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById('list');
+      list.innerHTML = '';
+      data.forEach(s => {
+        list.innerHTML += `
+          <tr>
+            <td>${s.id}</td>
+            <td>${s.name}</td>
+            <td>${s.email}</td>
+            <td>${s.age}</td>
+            <td>${s.className}</td>
+            <td><button onclick="del(${s.id})">Delete</button></td>
+          </tr>`;
+      });
+    });
+}
+
+function del(id) {
+  fetch('/api/students/' + id, {
+    method: 'DELETE',
+    credentials: 'same-origin'
+  }).then(load);
+}
+
+function clearForm() {
+  document.getElementById('name').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('age').value = '';
+  document.getElementById('className').value = '';
+}
+</script>
+
+</body>
+</html>
